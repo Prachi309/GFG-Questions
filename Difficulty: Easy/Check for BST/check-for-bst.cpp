@@ -20,18 +20,20 @@ struct Node {
 class Solution {
   public:
     // Function to check whether a Binary Tree is BST or not.
-    bool isValid( Node* root , long long min, long long max){
+    bool isValid(Node* root, long long mini, long long maxi ){
         if(root==NULL) return true;
         
-        if(root->data >= max|| root->data <=min) return false;
+        if(root->data >= maxi || root->data <= mini) return false;
         
-        return isValid(root->left, min, root->data) && isValid(root->right, root->data, max);
+        return isValid(root->right, root->data, maxi) 
+        && isValid(root->left, mini, root->data);
         
     }
     
+    
     bool isBST(Node* root) {
         // Your code here
-        return isValid(root, LONG_MIN,LONG_MAX);
+      return  isValid(root, LONG_MIN,LONG_MAX);
     }
 };
 
